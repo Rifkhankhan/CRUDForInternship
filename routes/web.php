@@ -24,8 +24,10 @@ Route::get('/create',[App\Http\Controllers\HomeController::class,'create'])->nam
 Route::get('/view/{id}',[App\Http\Controllers\HomeController::class,'view'])->name('view');
 Route::get('/edit/{id}',[App\Http\Controllers\HomeController::class,'edit'])->name('edit');
 Route::get('/delete/{id}',[App\Http\Controllers\HomeController::class,'delete'])->name('delete');
-Route::get('/store',[App\Http\Controllers\HomeController::class,'store'])->name('store');
+Route::post('/store',[App\Http\Controllers\HomeController::class,'store'])->name('store');
+Route::post('/update/{id}',[App\Http\Controllers\HomeController::class,'update'])->name('update');
+Route::get('/status/{id}',[App\Http\Controllers\HomeController::class,'changeStatus'])->name('status');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

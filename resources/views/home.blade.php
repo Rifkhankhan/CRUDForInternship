@@ -14,6 +14,11 @@
                     </div>
                     @endif
 
+                    @if($message=Session::get('success'))
+                    <div class=" alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                    @endif
 
                     <div class="container mt-3">
 
@@ -37,7 +42,11 @@
                                     <td>{{++$i}}</td>
                                     <td>{{$student->name}}</td>
                                     <td>{{$student->age}}</td>
-                                    <td>{{$student->image}}</td>
+                                    <td>
+                                        <img style="width:150px;height:150px;margin:0%;padding:0%;"
+                                            src="{{ asset($student->image) }}">
+                                    </td>
+
                                     <td>
                                         <a href="{{route('view',$student->id)}}" class="btn btn-primary">View</a>
                                         <a href="{{route('edit',$student->id)}}" class="btn btn-success">Edit</a>
@@ -46,11 +55,13 @@
                                     </td>
 
                                     <td>
-                                        @if($student->status=='active')
-                                        <a class="btn btn-danger">Inactive</a>
-                                        @elseif($student->status=='inactive')
-                                        <a class="btn btn-primary">Active</a>
-                                        @endif
+                                        <form action="{{route('status',$student->id)}}" method="get">
+                                            @if($student->status=='active')
+                                            <button type="submit" class="btn btn-danger">Inactive</button>
+                                            @elseif($student->status=='inactive')
+                                            <button type="submit" class="btn btn-primary">Active</button>
+                                            @endif
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

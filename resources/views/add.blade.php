@@ -14,9 +14,19 @@
                     </div>
                     @endif
 
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <a href="{{route('home')}}" class="btn btn-secondary">Back</a>
                     <div class="container mt-3">
-                        <form action="{{route('store')}}">
+                        <form method="POST" action="{{route('store')}}" enctype="multipart/form-data">
                             @csrf
                             <table class="table table-hover">
                                 <tbody>
@@ -41,8 +51,10 @@
                                         <td>
                                             <input type="file" name="image" id="" required>
                                         </td>
+                                        <td><input type="hidden" name="status" id="status" value='active'></td>
+
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <th>Status
                                         </th>
                                         <td>
@@ -51,14 +63,15 @@
                                                 <option value="inactive" selected>Inactive</option>
                                             </select>
                                         </td>
-                                    </tr>
+                                    </tr> -->
 
 
 
                                 </tbody>
 
                             </table>
-                            <a href="{{route('store')}}" class="btn btn-success">Submit</a>
+                            <button type="submit" class="btn btn-success">Create</button>
+
 
                         </form>
 

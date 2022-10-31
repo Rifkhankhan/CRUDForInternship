@@ -14,41 +14,72 @@
                     </div>
                     @endif
 
+
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <a href="{{route('home')}}" class="btn btn-secondary">Back</a>
 
                     <div class="container mt-3">
+                        <form method="post" action="{{route('update',$student->id)}}" enctype="multipart/form-data">
+                            @csrf
+                            <table class=" table table-hover">
+                                </tbody>
 
-                        <table class="table table-hover">
-                            <thead>
                                 <tr>
                                     <th>Name
                                     </th>
                                     <td>
-                                        <input type="text" name="name" id="" value="{{$student->name}}">
+                                        <input type="text" name="name" id="" value="{{$student->name}}"
+                                            class="form-control">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Age
                                     </th>
                                     <td>
-                                        <input type="number" name="age" id="" value="{{$student->age}}">
+                                        <input type="number" name="age" id="" value="{{$student->age}}"
+                                            class="form-control">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Image
+                                    <th>Old Image
                                     </th>
+
                                     <td>
-                                        <input type="file" name="image" id="" value="{{$student->image}}">
+                                        <img style="width:150px;height:150px;margin:0%;padding:0%;"
+                                            src="{{ asset($student->image) }}">
                                     </td>
+
+                                </tr>
+
+                                <tr>
+                                    <th>New Image
+                                    </th>
+
+                                    <td>
+                                        <input type="file" name="image" id="" class="form-control">
+                                        <input type="hidden" name="oldimage" value="{{$student->image}}"
+                                            class="form-control">
+
+                                    </td>
+
                                 </tr>
                                 <tr>
                                     <th>Status
                                     </th>
                                     <td>
-                                        <select name="status" id="">
+                                        <select name="status" id="" class="form-control">
                                             <option value="active" {{ $student->status == 'active' ? 'selected' : '' }}>
                                                 Active</option>
-                                            <option value="inactive"
+                                            <option value="inactive" class="form-control"
                                                 {{ $student->status == 'inactive' ? 'selected' : '' }}>
                                                 Inactive
                                             </option>
@@ -58,11 +89,13 @@
                                 </tr>
 
                                 </tr>
-                            </thead>
-                            <tbody>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </form>
+
+
                     </div>
                 </div>
             </div>

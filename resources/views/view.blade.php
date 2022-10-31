@@ -13,6 +13,8 @@
                         {{ session('status') }}
                     </div>
                     @endif
+
+
                     <a href="{{route('home')}}" class="btn btn-secondary">Back</a>
 
                     <div class="container mt-3">
@@ -23,36 +25,33 @@
                                     <th>Name
                                     </th>
                                     <td>
-                                        <input type="text" name="name" id="" value="{{$student->name}}">
+                                        {{$student->name}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Age
                                     </th>
                                     <td>
-                                        <input type="number" name="age" id="" value="{{$student->age}}">
+                                        {{$student->age}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Image
                                     </th>
                                     <td>
-                                        <input type="file" name="image" id="" value="{{$student->image}}">
+                                        <img style="width:150px;height:150px;margin:0%;padding:0%;"
+                                            src="{{ asset($student->image) }}">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Status
                                     </th>
                                     <td>
-                                        <select name="status" id="">
-                                            <option value="active" {{ $student->status == 'active' ? 'selected' : '' }}>
-                                                Active</option>
-                                            <option value="inactive"
-                                                {{ $student->status == 'inactive' ? 'selected' : '' }}>
-                                                Inactive
-                                            </option>
+                                        <strong>
 
-                                        </select>
+                                            {{ $student->status == 'active' ? 'Active' : 'Inactive' }}
+                                        </strong>
+
                                     </td>
                                 </tr>
 
