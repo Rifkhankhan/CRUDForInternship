@@ -26,29 +26,37 @@ class HomeController extends Controller
     {
         $students = Student::all();
         $i = 0;
-        return view('home',compact('students','i'));
+        return view('home', compact('students', 'i'));
     }
 
-    public function edit($id,Request $request){
-        $student = Student::where('id',$id)->first();
-        return view('edit',compact('student'));
+    public function edit($id, Request $request)
+    {
+        $student = Student::where('id', $id)->first();
+        return view('edit', compact('student'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('add');
     }
 
-    public function view($id){
-        $student = Student::where('id',$id)->first();
-        return view('view',compact('student'));
-
+    public function view($id)
+    {
+        $student = Student::where('id', $id)->first();
+        return view('view', compact('student'));
     }
 
-    public function store($id,Request $request){
-        return view('store');
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'image' => 'required',
+            'age' => 'required',
 
+        ]);
     }
 
-    public function delete($id){}
-
+    public function delete($id)
+    {
+    }
 }

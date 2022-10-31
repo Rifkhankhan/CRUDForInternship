@@ -16,47 +16,52 @@
 
                     <a href="{{route('home')}}" class="btn btn-secondary">Back</a>
                     <div class="container mt-3">
+                        <form action="{{route('store')}}">
+                            @csrf
+                            <table class="table table-hover">
+                                <tbody>
 
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Name
-                                    </th>
-                                    <td>
-                                        <input type="text" name="name" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Age
-                                    </th>
-                                    <td>
-                                        <input type="number" name="age" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Image
-                                    </th>
-                                    <td>
-                                        <input type="file" name="image" id="">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Status
-                                    </th>
-                                    <td>
-                                        <select name="status" id="">
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                        </select>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <th>Name
+                                        </th>
+                                        <td>
+                                            <input type="text" name="name" id="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Age
+                                        </th>
+                                        <td>
+                                            <input type="number" name="age" id="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Image
+                                        </th>
+                                        <td>
+                                            <input type="file" name="image" id="" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Status
+                                        </th>
+                                        <td>
+                                            <select name="status" id="">
+                                                <option value="active">Active</option>
+                                                <option value="inactive" selected>Inactive</option>
+                                            </select>
+                                        </td>
+                                    </tr>
 
-                                </tr>
-                            </thead>
-                            <tbody>
 
-                            </tbody>
-                        </table>
+
+                                </tbody>
+
+                            </table>
+                            <a href="{{route('store')}}" class="btn btn-success">Submit</a>
+
+                        </form>
+
                     </div>
                 </div>
             </div>

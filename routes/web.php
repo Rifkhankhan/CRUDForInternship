@@ -24,7 +24,7 @@ Route::get('/create',[App\Http\Controllers\HomeController::class,'create'])->nam
 Route::get('/view/{id}',[App\Http\Controllers\HomeController::class,'view'])->name('view');
 Route::get('/edit/{id}',[App\Http\Controllers\HomeController::class,'edit'])->name('edit');
 Route::get('/delete/{id}',[App\Http\Controllers\HomeController::class,'delete'])->name('delete');
-Route::post('/store/{id}',[App\Http\Controllers\HomeController::class,'store'])->name('store');
+Route::get('/store',[App\Http\Controllers\HomeController::class,'store'])->name('store');
 
 Auth::routes();
 
