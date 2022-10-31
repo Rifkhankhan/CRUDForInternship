@@ -20,6 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/create',[App\Http\Controllers\HomeController::class,'create'])->name('create');
+Route::get('/view/{id}',[App\Http\Controllers\HomeController::class,'view'])->name('view');
+Route::get('/edit/{id}',[App\Http\Controllers\HomeController::class,'edit'])->name('edit');
+Route::get('/delete/{id}',[App\Http\Controllers\HomeController::class,'delete'])->name('delete');
+Route::post('/store/{id}',[App\Http\Controllers\HomeController::class,'store'])->name('store');
 
 Auth::routes();
 

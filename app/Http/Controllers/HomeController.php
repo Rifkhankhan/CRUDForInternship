@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,31 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $students = Student::all();
+        $i = 0;
+        return view('home',compact('students','i'));
     }
+
+    public function edit($id,Request $request){
+        $student = Student::where('id',$id)->first();
+        return view('edit',compact('student'));
+    }
+
+    public function create(){
+        return view('add');
+    }
+
+    public function view($id){
+        $student = Student::where('id',$id)->first();
+        return view('view',compact('student'));
+
+    }
+
+    public function store($id,Request $request){
+        return view('store');
+
+    }
+
+    public function delete($id){}
+
 }
