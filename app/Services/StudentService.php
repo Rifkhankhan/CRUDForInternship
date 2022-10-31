@@ -1,59 +1,39 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
-use App\Facades\Student as FacadeStudent;
-use Illuminate\Http\Request;
 use App\Models\Student;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
-class HomeController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        $students = FacadeStudent::index();
-        // $students = Student::all();
-        $i = 0;
-        return view('home', compact('students', 'i'));
-    }
-
-    public function edit($id)
-    {
-        // $student = Student::where('id', $id)->first();
-        $student = FacadeStudent::person($id);
-        return view('edit', compact('student'));
-    }
-
-    public function create()
-    {
+class StudentService{
+    public static function create(){
         return view('add');
     }
 
-    public function view($id)
+    public static function index()
     {
-        // $student = Student::where('id', $id)->first();
-        // return view('view', compact('student'));
-
-        $student = FacadeStudent::person($id);
-        return view('view', compact('student'));
+        $students = Student::all();
+        return $students;
     }
 
-    public function store(Request $request)
+
+    public static function person($id)
+    {
+        $student = Student::where('id', $id)->first();
+        // return view('edit', compact('student'));
+
+        return $student;
+    }
+
+
+    // public static function view($id)
+    // {
+    //     $student = Student::where('id', $id)->first();
+    //     return view('view', compact('student'));
+    // }
+
+    public static function store(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -81,7 +61,7 @@ class HomeController extends Controller
         return redirect()->route('home')->with('success', 'successfully inserted');
     }
 
-    public function update(Request $request, $id)
+    public static function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
@@ -100,7 +80,7 @@ class HomeController extends Controller
             $brand_image->move($up_location, $image_name);
 
             unlink($oldimage);
-            DB::table('students')->where('id', $id)->update([
+            Student::find($id)->update([
                 'name' => $request->name,
                 "image" => $last_img,
                 "age" => $request->age,
@@ -109,7 +89,7 @@ class HomeController extends Controller
 
             return redirect()->route('home')->with('success', 'successfully updated');
         } else {
-            DB::table('students')->where('id', $id)->update([
+            Student::find($id)->update([
                 'name' => $request->name,
                 "age" => $request->age,
                 "status" => $request->status,
@@ -119,31 +99,35 @@ class HomeController extends Controller
         }
     }
 
-    public function changeStatus($id)
+    public static function changeStatus( $id)
     {
 
-        // $student = Student::find($id);
+        $student = Student::find($id);
 
-        $status = FacadeStudent::changeStatus($id);
-
-        if ($status == 'active') {
-
-
-            return redirect()->back()->with('success',"Successfully Changed as Inactivate");
-        } else if ($status == 'inactive') {
-
-
-            return redirect()->back()->with('success',"Successfully Changed as Active");
-
+        if ($student->status === 'active') {
+            Student::find($id)->update([
+                'status' => 'inactive',
+            ]);
+            return Student::find($id)->status;
+        } else if ($student->status === 'inactive') {
+            Student::find($id)->first()->update([
+                'status' => 'active',
+            ]);
+            return Student::find($id)->status;
         } else {
             return redirect()->route('home')->with('success', 'Failed updated status ');
         }
     }
 
-    public function delete($id)
+    public static function delete($id)
     {
+        $image = Student::find($id)->image;
+        unlink($image);
 
-        FacadeStudent::delete($id);
-        return redirect()->back();
+        Student::where('id', $id)->delete();
+
+   
     }
+
+
 }

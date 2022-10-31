@@ -1,6 +1,9 @@
 <?php
 
+use App\Facades\Student;
 use Illuminate\Support\Facades\Route;
+
+use App\Services\StudentService;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +34,35 @@ Route::get('/status/{id}',[App\Http\Controllers\HomeController::class,'changeSta
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/create',function(){
+//     return Student::create();
+// })->name('create');
+
+// Route::get('/home',function(){
+//     return Student::index();
+// })->name('home');
+
+
+
+// Route::get('/view/{id}',function(){
+//     return Student::view('id');
+// })->name('view');
+
+// Route::get('/edit/{id}',function(){
+//     return Student::edit();
+// })->name('edit');
+
+
+// Route::get('/status/{id}',function(){
+//     return Student::changeStatus();
+// })->name('status');
+
+
+// Route::post('/store/{id}',function(){
+//     return Student::store();
+// })->name('store');
+
+// Route::get('/delete{id}/',function(){
+//     return Student::delete();
+// })->name('delete');
