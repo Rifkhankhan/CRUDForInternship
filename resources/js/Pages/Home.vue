@@ -1,7 +1,10 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app')
 
-@section('content')
-<div class="container">
+@section('content') -->
+
+<Nav />
+
+<template class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -35,7 +38,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <a href="{{route('create')}}" class="btn btn-primary">Create</a>
+                                    <a Link href="{{route('create')}}" class="btn btn-primary">Create</a>
                                 </tr>
                                 @foreach($students as $student)
                                 <tr class="text-center">
@@ -72,5 +75,17 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
+</template>
+
+
+
+
+<script>
+import Nav from '../Shared/Nav.vue';
+import { Link } from '@inertiajs/inertia-vue3';
+    export default {
+        components:{Link}
+    };
+
+
+</script>

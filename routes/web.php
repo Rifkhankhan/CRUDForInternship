@@ -4,6 +4,7 @@ use App\Facades\Student;
 use Illuminate\Support\Facades\Route;
 
 use App\Services\StudentService;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +17,17 @@ use App\Services\StudentService;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return Inertia::render("Welcome");
+// });
 
+// Route::get('/home', function () {
+//     return Inertia::render("Home");
+// });
+
+// Route::get('/create', function () {
+//     return Inertia::render("Create");
+// });
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
